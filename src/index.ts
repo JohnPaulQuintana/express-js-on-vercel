@@ -28,6 +28,7 @@ const fetchPhivolcs = async (): Promise<Quake[]> => {
     ]);
 
     const html = await response.text();
+    console.log('🔵 PHIVOLCS HTML length:', html.length);
     if (!html || html.length < 1000) return [];
 
     const $ = cheerio.load(html);
@@ -35,6 +36,7 @@ const fetchPhivolcs = async (): Promise<Quake[]> => {
     const MAX_QUAKES = 100;
 
     const outerTable = $('.MsoNormalTable').eq(2);
+    console.log('Outer table found?', outerTable.length); // should be 1
     const targetTable = outerTable.find('table').first().length
       ? outerTable.find('table').first()
       : outerTable;
